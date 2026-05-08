@@ -42,6 +42,7 @@ def tela_inicial(request: Request):
 @app.post("/cadastro")
 def cadastrar_usuario(
     request: Request,
+    nome: str = Form(...),
     email: str = Form(...),
     senha: str = Form(...),
     db: Session = Depends(get_db) #dependência com a tabela
@@ -56,7 +57,7 @@ def cadastrar_usuario(
             {"request": request, "erro": "Email: já cadastrado."}
         )
     #Criando um objeto
-    novo_usuario = Usuario(email=email, senha=senha)
+    novo_usuario = Usuario(nome=nome, email=email, senha=senha)
     db.add(novo_usuario)
     db.commit()
 
