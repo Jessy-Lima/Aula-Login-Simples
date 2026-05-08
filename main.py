@@ -104,3 +104,10 @@ def tela_poslogin(
         "inicio.html",
         {"request": request, "usuario": user_existente}
     )
+
+# Logout do sistema - Sair
+@app.get("/logout")
+def logout():
+    response = RedirectResponse(url="/", status_code=303)
+    response.delete_cookie("usuario_id")
+    return response

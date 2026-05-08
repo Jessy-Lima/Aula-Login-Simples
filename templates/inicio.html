@@ -1,3 +1,172 @@
-<h1>Painel administrativo</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAI | Painel Administrativo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
 
-<p> Bem-vindo, {{ usuario.email }}</p>
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+
+        /* Barra Lateral */
+        nav {
+            width: 250px;
+            background-color: #004a94;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+
+        nav .logo {
+            text-align: center;
+            font-weight: bold;
+            font-size: 22px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ed1c24;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            transition: 0.3s;
+            display: block;
+            border-left: 4px solid transparent;
+        }
+
+        nav a:hover {
+            background-color: #003366;
+            border-left: 4px solid #ed1c24;
+        }
+
+        /* Área de Conteúdo Principal */
+        main {
+            flex-grow: 1;
+        }
+
+        header {
+            background-color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .user-info {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .user-email {
+            font-weight: bold;
+            color: #004a94;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Cards de Resumo */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #004a94;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .btn-logout {
+            color: #ed1c24;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">SENAI</div>
+        <a href="#">Início</a>
+        <a href="#">Cursos</a>
+        <a href="#">Alunos</a>
+        <a href="#">Relatórios</a>
+        <a href="#">Configurações</a>
+    </nav>
+
+    <main>
+        <header>
+            <div class="user-info">
+                Bem-vindo, <span class="user-email">{{ usuario.email }}</span>
+            </div>
+            <a href="/logout" class="btn-logout">Sair</a>
+        </header>
+
+        <div class="container">
+            <h1>Painel Administrativo</h1>
+            
+            <p>Gerencie aqui as informações do sistema.</p>
+
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Cursos Ativos</h3>
+                    <p>12</p>
+                </div>
+                <div class="card" style="border-top-color: #ed1c24;">
+                    <h3>Inscrições</h3>
+                    <p>145</p>
+                </div>
+                <div class="card">
+                    <h3>Presença Média</h3>
+                    <p>88%</p>
+                </div>
+                <div class="card">
+                    <h3>Notificações</h3>
+                    <p>0</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <a href="/login"></a>
+</body>
+</html>
