@@ -61,3 +61,46 @@ def cadastrar_usuario(
     db.commit()
 
     return RedirectResponse(url="/login", status_code=303)
+
+@app.post("/login")
+def fazer_login(
+    request: Request,
+    email: str = Form(...),
+    senha: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    #Verificar login
+    usuario = db.query(Usuario).filter(Usuario.email==email).filter(Usuario.senha==senha).first()
+    if usuario is None:
+        return templates.TemplateResponse(
+            request,
+            "cadastro.html",
+            {"request": request, "erro": "Email ou senha inválidos."}
+        )
+    response = RedirectResponse(url="/poslogin", status_code=303)
+
+    #Criando os coolie simples
+    response.set_cookie(
+        key="usuario_id",
+        value=str(usuario.id)
+    )
+
+    return response 
+
+#Tela protegida
+@app.get("/poslogin")
+def tela_poslogin(
+    request: Request,
+    db: Session = Depends(get_db),
+    ):
+    #Verificar id no cookie
+    usuario_id = request.cookies.get("usuario_id")
+    if usuario_id is None:
+        return RedirectResponse(url="/login", status_code=303)
+    
+    user_existente = db.query(Usuario).get(int(usuario_id))
+    return templates.TemplateResponse(
+        request,
+        "inicio.html",
+        {"request": request, "usuario": user_existente}
+    )
