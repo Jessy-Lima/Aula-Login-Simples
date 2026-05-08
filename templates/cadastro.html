@@ -87,7 +87,7 @@
         }
 
         button:hover {
-            background-color: #00457a;
+            background-color: #211a80;
         }
 
         .footer-links {
@@ -126,9 +126,13 @@
                 <label for="senha">Senha</label>
                 <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
             </div>
-
+            {% if erro %}
+            <p style="color: red;">{{erro}}</p>
+            {% endif %}
+            <br>
             <button type="submit">CADASTRAR</button>
         </form>
+        
         
         <div class="footer-links">
             <a href="/login">Já tenho conta? Entrar</a>
